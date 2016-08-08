@@ -7,7 +7,7 @@ class App extends React.Component {
     super();
     this.state = {
       txt: "This is the state hey",
-      cat: 0
+      update: this.update.bind(this)
     }
   }
 
@@ -20,12 +20,20 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.update.bind(this)} />
-        <h2>{this.state.txt}</h2>
+        <Widget txt={this.state.txt} update={this.state.update}/>
       </div>
     );
   }
 }
+
+const Widget = (props) => {
+  return (
+    <div>
+      <input type="text" onChange={props.update} />
+      <h2>{props.txt}</h2>
+    </div>
+  )
+};
 
 ReactDOM.render(
   <App />, document.getElementById('app')
